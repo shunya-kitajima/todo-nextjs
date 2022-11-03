@@ -30,6 +30,34 @@ export const useMutateTask = () => {
         reset()
       },
       onError: (err: any) => {
+        reset()
+        if (err.response.status === 401 || err.response.status === 403)
+          router.push('/')
+      },
+    }
+  )
+
+  const updateTaskMutation = useMutation(
+    async (task: EditedTask) => {
+      const res = await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_URL}/todo/${task.id}`,
+        task
+      )
+      return res.data
+    },
+    {
+      onSuccess: (res, variables) => {
+        const previousTasks = queryClient.getQueryData<Task[]>(['tasks'])
+        if (previousTasks) {
+          queryClient.setQueryData<Task[]>(
+            ['tasks'],
+            previousTasks.map((task) => (task.id === res.id ? res : task))
+          )
+        }
+        reset()
+      },
+      onError: (err: any) => {
+        reset()
         if (err.response.status === 401 || err.response.status === 403)
           router.push('/')
       },
