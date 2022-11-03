@@ -12,14 +12,40 @@ export const TaskForm: React.FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (editedTask.id === 0) {
-      createTaskMutation.mutate({
-        title: editedTask.title,
-        description: editedTask.description,
-      })
+      createTaskMutation.mutate(editedTask)
     } else {
       updateTaskMutation.mutate(editedTask)
     }
   }
 
-  return <div>TaskForm</div>
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <TextInput
+          mt="md"
+          placeholder="title"
+          value={editedTask.title || ''}
+          onChange={(e) => update({ ...editedTask, title: e.target.value })}
+        />
+        <TextInput
+          mt="md"
+          placeholder="description"
+          value={editedTask.description || ''}
+          onChange={(e) =>
+            update({ ...editedTask, description: e.target.value })
+          }
+        />
+        <Center mt="lg">
+          <Button
+            disabled={editedTask.title === ''}
+            leftIcon={<IconDatabase size={14} />}
+            color="cyan"
+            type="submit"
+          >
+            {editedTask.id === 0 ? 'Create' : 'Update'}
+          </Button>
+        </Center>
+      </form>
+    </>
+  )
 }
