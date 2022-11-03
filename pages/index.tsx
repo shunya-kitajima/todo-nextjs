@@ -56,7 +56,39 @@ const Home: NextPage = () => {
     }
   }
 
-  return <div></div>
+  return (
+    <Layout title="Auth">
+      <ShieldCheckIcon className="h-16 w-16 text-blue-500" />
+      {error && (
+        <Alert
+          my="md"
+          variant="filled"
+          icon={<ExclamationCircleIcon className="text-pink-500" />}
+          title="Authorization Error"
+          color="red"
+          radius="md"
+        >
+          {error}
+        </Alert>
+      )}
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+        <TextInput
+          mt="md"
+          id="email"
+          label="Email"
+          placeholder="example@gmail.com"
+          {...form.getInputProps('email')}
+        />
+        <PasswordInput
+          mt="md"
+          id="password"
+          label="Password"
+          description="Must be min 5 chars"
+          {...form.getInputProps('password')}
+        />
+      </form>
+    </Layout>
+  )
 }
 
 export default Home
