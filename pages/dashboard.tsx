@@ -14,6 +14,7 @@ const Dashboard: NextPage = () => {
 
   const logout = async (): Promise<void> => {
     queryClient.removeQueries(['user'])
+    queryClient.removeQueries(['tasks'])
     await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`)
     router.push('/')
   }
