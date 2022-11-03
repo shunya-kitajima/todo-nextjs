@@ -27,6 +27,7 @@ export const TaskItem: React.FC<
           }}
         />
       </div>
+      <span>{title}</span>
     </List.Item>
   )
 }
