@@ -37,6 +37,25 @@ const Home: NextPage = () => {
     },
   })
 
+  const handleSubmit = async (): Promise<void> => {
+    try {
+      if (isRegister) {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
+          email: form.values.email,
+          password: form.values.password,
+        })
+      }
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+        email: form.values.email,
+        password: form.values.password,
+      })
+      form.reset()
+      router.push('/dashboard')
+    } catch (e: any) {
+      setError(e.response.data.message)
+    }
+  }
+
   return <div></div>
 }
 
