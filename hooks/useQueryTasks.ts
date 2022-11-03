@@ -14,7 +14,7 @@ export const useQueryTasks = () => {
   }
 
   return useQuery<Task[], Error>({
-    queryKey: ['todos'],
+    queryKey: ['tasks'],
     queryFn: getTasks,
     onError: (err: any) => {
       if (err.response.status === 401 || err.response.status === 403)
