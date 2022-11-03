@@ -86,6 +86,29 @@ const Home: NextPage = () => {
           description="Must be min 5 chars"
           {...form.getInputProps('password')}
         />
+        <Group mt="xl" position="apart">
+          <Anchor
+            component="button"
+            type="button"
+            className="text-gray-300"
+            size="xs"
+            onClick={() => {
+              setIsRegister(!isRegister)
+              setError('')
+            }}
+          >
+            {isRegister
+              ? 'Have an account? Login'
+              : "Don't have an account? Register"}
+          </Anchor>
+          <Button
+            leftIcon={<IconDatabase size={14} />}
+            color="cyan"
+            type="submit"
+          >
+            {isRegister ? 'Register' : 'Login'}
+          </Button>
+        </Group>
       </form>
     </Layout>
   )
