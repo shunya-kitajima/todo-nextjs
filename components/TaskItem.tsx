@@ -11,5 +11,22 @@ export const TaskItem: React.FC<
   const update = useStore((state) => state.updateEditedTask)
   const { deleteTaskMutation } = useMutateTask()
 
-  return <div>TaskItem</div>
+  return (
+    <List.Item>
+      <div className="float-left mr-10">
+        <PencilAltIcon
+          className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
+          onClick={() => {
+            update({ id, title, description })
+          }}
+        />
+        <TrashIcon
+          className="h-5 w-5 cursor-pointer text-blue-500"
+          onClick={() => {
+            deleteTaskMutation.mutate(id)
+          }}
+        />
+      </div>
+    </List.Item>
+  )
 }
