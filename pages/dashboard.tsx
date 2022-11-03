@@ -5,8 +5,8 @@ import axios from 'axios'
 import { LogoutIcon } from '@heroicons/react/outline'
 import { Layout } from '../components/Layout'
 import { UserInfo } from '../components/UserInfo'
-import { TaskForm } from '../components/TaskForm'
-import { TaskList } from '../components/TaskList'
+import { TaskFormMemo } from '../components/TaskForm'
+import { TaskListMemo } from '../components/TaskList'
 
 const Dashboard: NextPage = () => {
   const router = useRouter()
@@ -26,8 +26,8 @@ const Dashboard: NextPage = () => {
         onClick={logout}
       />
       <UserInfo />
-      <TaskForm />
-      <TaskList />
+      <TaskFormMemo />
+      <TaskListMemo />
     </Layout>
   )
 }

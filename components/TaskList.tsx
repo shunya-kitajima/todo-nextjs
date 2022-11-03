@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { List, ThemeIcon, Loader } from '@mantine/core'
 import { IconCircleDashed } from '@tabler/icons'
 import { useQueryTasks } from '../hooks/useQueryTasks'
-import { TaskItem } from './TaskItem'
+import { TaskItemMemo } from './TaskItem'
 
-export const TaskList: React.FC = () => {
+const TaskList: React.FC = () => {
   const { data: tasks, status } = useQueryTasks()
 
   if (status === 'loading') return <Loader my="lg" color="cyan" />
@@ -21,7 +21,7 @@ export const TaskList: React.FC = () => {
       }
     >
       {tasks?.map((task) => (
-        <TaskItem
+        <TaskItemMemo
           key={task.id}
           id={task.id}
           title={task.title}
@@ -31,3 +31,5 @@ export const TaskList: React.FC = () => {
     </List>
   )
 }
+
+export const TaskListMemo = memo(TaskList)

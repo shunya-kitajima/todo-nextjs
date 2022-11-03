@@ -1,10 +1,10 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, memo } from 'react'
 import { TextInput, Button, Center } from '@mantine/core'
 import { IconDatabase } from '@tabler/icons'
 import useStore from '../store'
 import { useMutateTask } from '../hooks/useMutateTask'
 
-export const TaskForm: React.FC = () => {
+const TaskForm: React.FC = () => {
   const { editedTask } = useStore()
   const update = useStore((state) => state.updateEditedTask)
   const { createTaskMutation, updateTaskMutation } = useMutateTask()
@@ -49,3 +49,5 @@ export const TaskForm: React.FC = () => {
     </>
   )
 }
+
+export const TaskFormMemo = memo(TaskForm)
