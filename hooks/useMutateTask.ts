@@ -46,7 +46,7 @@ export const useMutateTask = () => {
       return res.data
     },
     {
-      onSuccess: (res, variables) => {
+      onSuccess: (res, _) => {
         const previousTasks = queryClient.getQueryData<Task[]>(['tasks'])
         if (previousTasks) {
           queryClient.setQueryData<Task[]>(
@@ -64,5 +64,28 @@ export const useMutateTask = () => {
     }
   )
 
-  return {}
+  const deleteTaskMutation = useMutation(
+    async (id: number) => {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/todo/${id}`)
+    },
+    {
+      onSuccess: (_, variables) => {
+        const previousTasks = queryClient.getQueryData<Task[]>(['tasks'])
+        if (previousTasks) {
+          queryClient.setQueryData<Task[]>(
+            ['tasks'],
+            previousTasks.filter((task) => task.id !== variables)
+          )
+        }
+        reset()
+      },
+      onError: (err: any) => {
+        reset()
+        if (err.response.status === 401 || err.response.status === 403)
+          router.push('/')
+      },
+    }
+  )
+
+  return { createTaskMutation, updateTaskMutation, deleteTaskMutation }
 }
