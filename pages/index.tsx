@@ -26,6 +26,17 @@ const schema = Yup.object().shape({
 })
 
 const Home: NextPage = () => {
+  const router = useRouter()
+  const [isRegister, setIsRegister] = useState(false)
+  const [error, setError] = useState('')
+  const form = useForm<AuthForm>({
+    validate: yupResolver(schema),
+    initialValues: {
+      email: '',
+      password: '',
+    },
+  })
+
   return <div></div>
 }
 
