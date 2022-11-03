@@ -18,6 +18,13 @@ import { useForm, yupResolver } from '@mantine/form'
 import { Layout } from '../components/Layout'
 import { AuthForm } from '../types'
 
+const schema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('No email provided'),
+  password: Yup.string()
+    .min(5, 'Password should be min 5 chars')
+    .required('No password provided'),
+})
+
 const Home: NextPage = () => {
   return <div></div>
 }
