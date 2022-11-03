@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import { LogoutIcon } from '@heroicons/react/outline'
 import { Layout } from '../components/Layout'
+import { UserInfo } from '../components/UserInfo'
 
 const Dashboard: NextPage = () => {
   const router = useRouter()
@@ -18,6 +19,7 @@ const Dashboard: NextPage = () => {
         className="mb-6 h-6 w-6 cursor-pointer text-blue-500"
         onClick={logout}
       />
+      <UserInfo />
     </Layout>
   )
 }
